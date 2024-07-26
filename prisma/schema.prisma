@@ -1,0 +1,91 @@
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+model User {
+  id        String @id @default(cuid())
+  email     String @unique
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  password  Password?
+  cards     Card[]
+}
+
+model Password {
+  hash   String
+  user   User   @relation(fields: [userId], references: [id], onDelete: Cascade, onUpdate: Cascade)
+  userId String @unique
+}
+
+enum Rarity {
+  COMMON
+  UNCOMMON
+  RARE
+}
+
+enum PokemonType {
+  NORMAL
+  FIRE
+  WATER
+  ELECTRIC
+  GRASS
+  ICE
+  FIGHTING
+  POISON
+  GROUND
+  FLYING
+  PSYCHIC
+  BUG
+  ROCK
+  GHOST
+  DRAGON
+  DARK
+  STEEL
+  FAIRY
+}
+
+// source: https://bulbapedia.bulbagarden.net/wiki/List_of_Pok%C3%A9mon_Trading_Card_Game_expansions
+// I just used the first seven (Original Series)
+enum PokemonTGGEpxansions {
+  BS
+  JU
+  FO
+  B2
+  TR
+  G1
+  G2
+}
+
+model Card {
+  id         String        @id @default(cuid())
+  title      String
+  hp         Int
+  weakness   PokemonType?
+  resistance PokemonType?
+  rarity     Rarity @default(COMMON)
+  type       PokemonType @default(NORMAL)
+  expansion  PokemonTGGEpxansions @default(BS)
+  createdAt  DateTime @default(now())
+  updatedAt  DateTime @updatedAt
+  attacks    Attack[] // One-to-many relationship
+  user       User?   @relation(fields: [userId], references: [id], onDelete: Cascade, onUpdate: Cascade)
+  userId     String?
+}
+
+model Attack {
+  id         String   @id @default(cuid())
+  name       String
+  body       String?
+  damage     Int? @default(0)
+  cardId     String
+  card       Card     @relation(fields: [cardId], references: [id], onDelete: Cascade, onUpdate: Cascade)
+}
+
+// Helpful commands:
+// npx prisma migrate reset
+// npx prisma migrate dev --name migration-name

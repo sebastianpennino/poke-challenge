@@ -1,0 +1,76 @@
+.poke-title {
+  font-family: 'Zilla Slab Bold', serif;
+  font-style: italic;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  font-weight: 700;
+}
+
+.poke-title-normal {
+  font-family: 'Zilla Slab Bold', serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  font-weight: 700;
+}
+
+.poke-title-regular {
+  font-family: 'Zilla Slab', serif;
+  font-style: italic;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  font-weight: 400;
+}
+
+.battle-page-bg {
+  background-image: url('/assets/images/battle.png');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+
+@font-face {
+  font-family: 'Zilla Slab';
+  src: url('/assets/fonts/zillaslab-regular-webfont.eot');
+  src: url('/assets/fonts/zillaslab-regular-webfont.eot?#iefix') format('embedded-opentype'),
+    url('/assets/fonts/zillaslab-regular-webfont.woff2') format('woff2'),
+    url('/assets/fonts/zillaslab-regular-webfont.woff') format('woff'),
+    url('/assets/fonts/zillaslab-regular-webfont.ttf') format('truetype');
+  font-weight: 400;
+  font-style: normal;
+}
+
+/* italic */
+@font-face {
+  font-family: 'Zilla Slab';
+  src: url('/assets/fonts/zillaslab-italic-webfont.eot');
+  src: url('/assets/fonts/zillaslab-italic-webfont.eot?#iefix') format('embedded-opentype'),
+    url('/assets/fonts/zillaslab-italic-webfont.woff2') format('woff2'),
+    url('/assets/fonts/zillaslab-italic-webfont.woff') format('woff'),
+    url('/assets/fonts/zillaslab-italic-webfont.ttf') format('truetype');
+  font-weight: 400;
+  font-style: italic;
+}
+
+/* bold */
+@font-face {
+  font-family: 'Zilla Slab Bold';
+  src: url('/assets/fonts/zillaslab-bold-webfont.eot');
+  src: url('/assets/fonts/zillaslab-bold-webfont.eot?#iefix') format('embedded-opentype'),
+    url('/assets/fonts/zillaslab-bold-webfont.woff2') format('woff2'),
+    url('/assets/fonts/zillaslab-bold-webfont.woff') format('woff'),
+    url('/assets/fonts/zillaslab-bold-webfont.ttf') format('truetype');
+  font-weight: 700;
+  font-style: normal;
+}
+
+/* bold italic*/
+@font-face {
+  font-family: 'Zilla Slab Bold';
+  src: url('/assets/fonts/zillaslab-bolditalic-webfont.eot');
+  src: url('/assets/fonts/zillaslab-bolditalic-webfont.eot?#iefix') format('embedded-opentype'),
+    url('/assets/fonts/zillaslab-bolditalic-webfont.woff2') format('woff2'),
+    url('/assets/fonts/zillaslab-bolditalic-webfont.woff') format('woff'),
+    url('/assets/fonts/zillaslab-bolditalic-webfont.ttf') format('truetype');
+  font-weight: 700;
+  font-style: italic;
+}

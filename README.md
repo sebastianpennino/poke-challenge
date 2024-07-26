@@ -1,6 +1,6 @@
 # Poke Card Creator
 
-A code challenge for CookUnity
+A code challenge involving pokemon cards
 
 ## Tech Stack
 
@@ -12,11 +12,10 @@ A code challenge for CookUnity
 - Code formatting with [Prettier](https://prettier.io)
 - Linting with [ESLint](https://eslint.org) (configured in `.eslintrc.js`).
 
-TODO - PENDING
+🔴 **TODO / PENDING** 🔴 
 - End-to-end testing with [Cypress](https://cypress.io)
 - Local third party request mocking with [MSW](https://mswjs.io)
 - Unit testing with [Vitest](https://vitest.dev) and [Testing Library](https://testing-library.com)
-
 
 ## Running the project locally
 
@@ -25,6 +24,9 @@ TODO - PENDING
 You should have installed on your machine:
 - [Docker](https://www.docker.com/get-started) 
 - [NodeJS](https://nodejs.org/en) (version 18+)
+
+Also you will need a local `.env` file
+- create a .env file on the root of the project (copying `.env.sample`)
 
 ### Instructions
 
@@ -58,15 +60,13 @@ You should have installed on your machine:
 
 This starts your app in development mode, rebuilding assets on file changes.
 
-The database [seed script](prisma/seed.ts) will create a new user with some data (the 8 cards from the assignment document) you can use to get started:
+The database [seed script](prisma/seed.ts) will create a new user with some data (some cards to interact with) you can use to get started:
 
 - Email: `cu@gmail.com`
 - Password: `welcome123`
 
 ### Relevant code:
 
-- creating users, and logging in and out [./app/models/user.server.ts](./app/models/user.server.ts)
-- user sessions, and verifying them [./app/session.server.ts](./app/session.server.ts)
 - cards (and all the CRUD operations) [./app/models/card.server.ts](./app/models/card.server.ts)
 
 ## My Assumptions:
@@ -78,42 +78,34 @@ As part of the assignment, a document outlining the assumptions and the implemen
 
 ## Testing
 
-TODO PENDING
+🔴 TODO: PENDING 🔴
 
-### Cypress
+### Cypress (e2e)
 
-TODO: UPDATE THIS TEXT
+🔴 TODO: PENDING 🔴
 
 Using Cypress for End-to-End tests in this project. You'll find those in the `cypress` directory. As you make changes, add to an existing file or create a new file in the `cypress/e2e` directory to test your changes.
 
-We use [`@testing-library/cypress`](https://testing-library.com/cypress) for selecting elements on the page semantically.
+Using [`@testing-library/cypress`](https://testing-library.com/cypress) for selecting elements on the page semantically.
 
 To run these tests in development, run `npm run test:e2e:dev` which will start the dev server for the app as well as the Cypress client. Make sure the database is running in docker as described above.
 
-We have a utility for testing authenticated features without having to go through the login flow:
+### Vitest (unit test)
 
-```ts
-cy.login();
-// you are now logged in as a new user
-```
-
-We also have a utility to auto-delete the user at the end of your test. Just make sure to add this in each test file:
-
-```ts
-afterEach(() => {
-  cy.cleanupUser();
-});
-```
-
-That way, we can keep your local db clean.
-
-### Vitest
-
-TODO: UPDATE THIS TEXT
+🔴 TODO: PENDING 🔴
 
 Using `vitest` for lower level tests of utilities and individual components. Using DOM-specific assertion helpers via [`@testing-library/jest-dom`](https://testing-library.com/jest-dom).
 
+
 ## Other stuff
+
+### Database connection (locally)
+
+Use this data in case you need to connect to the DB
+
+username: `postgres`
+password: `postgres`
+port: `5432`
 
 ### Type Checking
 
