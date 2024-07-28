@@ -1,6 +1,7 @@
 # Poke Card Creator
 
 A code challenge involving pokemon cards
+Note: You can find the project repo at https://github.com/sebastianpennino/poke-challenge
 
 ## Tech Stack
 
@@ -11,6 +12,8 @@ A code challenge involving pokemon cards
 - Styling with [Tailwind](https://tailwindcss.com/)
 - Code formatting with [Prettier](https://prettier.io)
 - Linting with [ESLint](https://eslint.org) (configured in `.eslintrc.js`).
+
+- [Redis](https://redis.io/) - We are using it to cache pokemon images
 
 🔴 **TODO / PENDING** 🔴 
 - End-to-end testing with [Cypress](https://cypress.io)

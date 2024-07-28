@@ -1,7 +1,6 @@
 import { Attack, Card, PokemonType } from "@prisma/client";
-import { useEffect, useState } from "react";
-import { getPokemonPicFromExternalAPI, defaultImageRoute } from "~/utils/pokemonPic";
 import cx from 'classnames';
+import { DEFAULT_POKE_IMG } from "~/constants";
 import { typeToBorderClass, typeToBgClass, typeToTextClass, typeToAccentClass } from "~/utils/pokemonColor";
 
 type PokeCardProps = Pick<Card, "title" | "hp" | "type" | "expansion" | "rarity"> &
@@ -9,28 +8,16 @@ type PokeCardProps = Pick<Card, "title" | "hp" | "type" | "expansion" | "rarity"
   attacks?: Attack[],
   weakness: PokemonType | null,
   resistance: PokemonType | null,
+  src?: string
 }
 
-export const PokemonCard = ({ title, type, hp, expansion, rarity, attacks, resistance, weakness }: PokeCardProps) => {
+export const PokemonCard = ({ title, type, hp, expansion, rarity, attacks, resistance, weakness, src }: PokeCardProps) => {
 
   const bgClass = typeToBgClass(type);
   const textClass = typeToTextClass(type);
   const borderClass = typeToBorderClass(type);
   const accentClass = typeToAccentClass(type);
-
-  const [imgSrc, setImgSrc] = useState<string>(defaultImageRoute);
-
-  useEffect(() => {
-    const fetchPokemonPic = async () => {
-      try {
-        const data = await getPokemonPicFromExternalAPI(title);
-        setImgSrc(data);
-      } catch (error) {
-        console.log(error);
-      }
-    }
-    fetchPokemonPic();
-  }, [title]);
+  const imgSrc = src || DEFAULT_POKE_IMG;
 
   return (
     <div className={cx('rounded-lg shadow-lg overflow-hidden hover:drop-shadow-glow transition', bgClass)} data-testid="pokemon-card">

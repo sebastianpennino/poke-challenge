@@ -10,6 +10,7 @@ import express from "express";
 import morgan from "morgan";
 import sourceMapSupport from "source-map-support";
 import { ip } from "address"; // Just for development
+import { getRedisClient } from "redisClient";
 
 sourceMapSupport.install();
 installGlobals();
@@ -29,6 +30,8 @@ async function run() {
       });
 
   const app = express();
+
+  getRedisClient(); // init redis client
 
   app.use((req, res, next) => {
     // helpful headers

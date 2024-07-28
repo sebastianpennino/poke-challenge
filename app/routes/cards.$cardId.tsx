@@ -19,18 +19,27 @@ import { typeToBgClass, typeToTextClass } from "~/utils/pokemonColor";
 import cx from 'classnames';
 import Modal from "~/components/Modal";
 import { sleep } from "~/utils/sleep";
+import { getPokemonPicFromExternalAPI } from "~/utils/pokemonPic.server";
 
 export const loader = async ({ params }: LoaderFunctionArgs) => {
   invariant(params.cardId, "cardId not found");
 
-  const cardItems = await getAllCards();
-  const card = await getCardById({ id: params.cardId });
+  try {
+    const cardItems = await getAllCards();
+    const card = await getCardById({ id: params.cardId });
+    if (!card) {
+      throw new Error("Card not found");
+    }
+    const cardImage = await getPokemonPicFromExternalAPI(card.title);
 
-  if (!card) {
-    throw new Response("Not Found", { status: 404 });
+    return json({ card, cardImage, cardItems });
+  } catch (error) {
+    if (error instanceof Error) {
+      throw new Response(error.message, { status: 500 });
+    } else {
+      throw new Response("An unexpected error occurred", { status: 500 });
+    }
   }
-
-  return json({ card, cardItems });
 };
 
 export const action: ActionFunction = async ({ params, request }) => {
@@ -114,7 +123,7 @@ export const action: ActionFunction = async ({ params, request }) => {
 
 export default function CardDetailPage() {
   const data = useLoaderData<typeof loader>();
-  const { card, cardItems } = data;
+  const { card, cardImage, cardItems } = data;
   const bgClass = typeToBgClass(card.type);
   const textClass = typeToTextClass(card.type);
 
@@ -153,6 +162,7 @@ export default function CardDetailPage() {
             attacks={card.attacks}
             resistance={card.resistance}
             weakness={card.weakness}
+            src={cardImage}
           />
 
           {/* Additional actions */}
