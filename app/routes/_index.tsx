@@ -59,7 +59,10 @@ export default function Index() {
                 By Sebastian Pennino © {new Date().getFullYear()}
               </div>
               <div className="flex justify-center align-middle">
-                <a href="https://www.linkedin.com/in/spennino/" className="mr-4">
+                <a
+                  href="https://www.linkedin.com/in/spennino/"
+                  className="mr-4"
+                >
                   <img
                     src="./assets/images/linkedin.svg"
                     alt="sebastian linkedin profile"

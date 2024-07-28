@@ -1,5 +1,10 @@
-// TODO: Update this with proper types
-const FloatingButton = ({ onClick }: any) => {
+import type { MouseEventHandler } from "react";
+
+type FloatingButtonProps = {
+  onClick?: MouseEventHandler<HTMLButtonElement>;
+};
+
+const FloatingButton = ({ onClick }: FloatingButtonProps) => {
   return (
     <button
       onClick={onClick}

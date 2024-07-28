@@ -1,10 +1,15 @@
-{/* TODO: some day will do it, currently it's outside of the scope of the challenge */}
-
+// TODO: some day will do it, currently it's outside of the scope of the challenge
 import type { ActionFunctionArgs } from "@remix-run/node";
 import { json, redirect } from "@remix-run/node";
 import { Form, useActionData } from "@remix-run/react";
 import { useEffect, useRef } from "react";
-import { createCard, Rarity, PokemonType, PokemonTGGEpxansions, CreateCardArgs } from "~/models/card.server";
+import {
+  createCard,
+  Rarity,
+  PokemonType,
+  PokemonTGGEpxansions,
+  CreateCardArgs,
+} from "~/models/card.server";
 import { requireUserId } from "~/session.server";
 
 export const action = async ({ request }: ActionFunctionArgs) => {
@@ -23,9 +28,9 @@ export const action = async ({ request }: ActionFunctionArgs) => {
         name: "attack 1",
         body: "aaa",
         damage: 10,
-      }
+      },
     ],
-    userId
+    userId,
   };
 
   const formData = await request.formData();
@@ -52,8 +57,7 @@ export const action = async ({ request }: ActionFunctionArgs) => {
   return redirect(`/cards/${card.id}`);
 };
 
-
-{/* TODO: some day will do it, currently it's outside of the scope of the challenge */}
+// TODO: some day will do it, currently it's outside of the scope of the challenge
 export default function NewCardPage() {
   const actionData = useActionData<typeof action>();
   const titleRef = useRef<HTMLInputElement>(null);
@@ -70,10 +74,7 @@ export default function NewCardPage() {
   return (
     <div className="flex min-h-full flex-col justify-center p-8">
       <h1 className="text-3xl font-bold text-center">New Card</h1>
-      <Form
-        method="post"
-        className="flex flex-col gap-2 w-full"
-      >
+      <Form method="post" className="flex flex-col gap-2 w-full">
         <div>
           <label className="flex w-full flex-col gap-1">
             <span>Title:</span>
@@ -123,7 +124,6 @@ export default function NewCardPage() {
             Save
           </button>
         </div>
-
       </Form>
     </div>
   );

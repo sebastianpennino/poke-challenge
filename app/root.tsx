@@ -53,16 +53,18 @@ export default function App() {
 export function ErrorBoundary() {
   const error = useRouteError();
 
-  let ResponseComponent = <></>
+  let ResponseComponent = <></>;
   if (error instanceof Error) {
-    ResponseComponent = <ErrorMessage message={`Something went wrong!: ${error.message}`} />;
+    ResponseComponent = (
+      <ErrorMessage message={`Something went wrong!: ${error.message}`} />
+    );
   }
   if (!isRouteErrorResponse(error)) {
     ResponseComponent = <ErrorMessage message="Unknown Error!" />;
   }
   //@ts-ignore TODO: fix this ts error
   if (error && error.status && error.status === 404) {
-    ResponseComponent = <NotFoundMessage message="Page not found!" />
+    ResponseComponent = <NotFoundMessage message="Page not found!" />;
   }
 
   return (
@@ -76,11 +78,9 @@ export function ErrorBoundary() {
         <Links />
       </head>
       <body className="h-full">
-        <div className="text-center h-full">
-          {ResponseComponent}
-        </div>
+        <div className="text-center h-full">{ResponseComponent}</div>
         <Scripts />
       </body>
     </html>
-  )
+  );
 }

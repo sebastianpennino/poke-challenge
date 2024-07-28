@@ -25,9 +25,9 @@ async function run() {
     process.env.NODE_ENV === "development"
       ? await createDevRequestHandler(initialBuild)
       : createRequestHandler({
-        build: initialBuild,
-        mode: initialBuild.mode,
-      });
+          build: initialBuild,
+          mode: initialBuild.mode,
+        });
 
   const app = express();
 
@@ -52,7 +52,10 @@ async function run() {
   app.disable("x-powered-by");
 
   // Remix fingerprints its assets so we can cache forever.
-  app.use("/build", express.static("public/build", { immutable: true, maxAge: "1y" }));
+  app.use(
+    "/build",
+    express.static("public/build", { immutable: true, maxAge: "1y" }),
+  );
 
   // Everything else (like favicon.ico) is cached for a minute
   app.use(express.static("public", { maxAge: "1m" }));

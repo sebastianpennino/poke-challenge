@@ -3,9 +3,13 @@ import { json } from "@remix-run/node";
 import { Link, useLoaderData } from "@remix-run/react";
 import invariant from "tiny-invariant";
 import { PokemonCard } from "~/components/PokeCard";
-import { getAllCardsWithFilters, PokemonTGGEpxansions, PokemonType } from "~/models/card.server";
+import {
+  getAllCardsWithFilters,
+  PokemonTGGEpxansions,
+  PokemonType,
+} from "~/models/card.server";
 import { requireUserId } from "~/session.server";
-import { fetchAllPokemonPics, getPokemonPicFromExternalAPI } from "~/utils/pokemonPic.server";
+import { fetchAllPokemonPics } from "~/utils/picture.server";
 
 export const loader = async ({ request }: LoaderFunctionArgs) => {
   const userId = await requireUserId(request);
@@ -15,25 +19,28 @@ export const loader = async ({ request }: LoaderFunctionArgs) => {
   let queryParams = url.searchParams;
 
   // Access specific query parameters
-  let q = queryParams.get('q') || "";
-  let expansion = queryParams.get('expansion') as PokemonTGGEpxansions;
-  let type = queryParams.get('type') as PokemonType;
+  let q = queryParams.get("q") || "";
+  let expansion = queryParams.get("expansion") as PokemonTGGEpxansions;
+  let type = queryParams.get("type") as PokemonType;
 
   const updatedParams = {
     ...(q ? { q } : {}),
     ...(expansion ? { expansion } : {}),
-    ...(type ? { type } : {})
-  }
+    ...(type ? { type } : {}),
+  };
 
   try {
     const cardItems = await getAllCardsWithFilters(updatedParams);
-    const cardTitles = cardItems.map(card => card.title);
+    const cardTitles = cardItems.map((card) => card.title);
     const cardImages = await fetchAllPokemonPics(cardTitles);
     const filtered = Object.keys(updatedParams).length > 0;
     return json({ cardItems, cardImages, filtered });
   } catch (error) {
     console.error(`Error fetching cards: ${error}`);
-    return json({ cardItems: [], cardImages: [], filtered: false }, { status: 500 });
+    return json(
+      { cardItems: [], cardImages: [], filtered: false },
+      { status: 500 },
+    );
   }
 };
 
@@ -48,15 +55,13 @@ export default function CardList() {
           {cardItems.length === 0 ? (
             <div className="flex h-full items-center justify-center">
               <p className="p-4 text-center text-black">
-                {filtered ?
-                  ("There's no cards matching your filters") :
-                  ("No cards yet, create a new one using the '+' button")
-                }
+                {filtered
+                  ? "There's no cards matching your filters"
+                  : "No cards yet, create a new one using the '+' button"}
               </p>
             </div>
           ) : (
             <div className="container mx-auto p-4">
-              
               <div className="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-4 lg:grid-cols-6 gap-4">
                 {cardItems.map((card, idx) => {
                   if (!card) return null;
@@ -73,12 +78,14 @@ export default function CardList() {
                         resistance={null}
                         src={cardImages[idx]}
                       />
-                    </Link>)
+                    </Link>
+                  );
                 })}
               </div>
             </div>
           )}
-        </>) : (
+        </>
+      ) : (
         <div className="flex h-full items-center justify-center">
           <p className="p-4 text-center text-black">Loading...</p>
         </div>

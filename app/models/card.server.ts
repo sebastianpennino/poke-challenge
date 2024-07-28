@@ -1,13 +1,23 @@
-import type { User, Card, PokemonType, Attack, PokemonTGGEpxansions, Prisma } from "@prisma/client";
+import type {
+  User,
+  Card,
+  PokemonType,
+  Attack,
+  PokemonTGGEpxansions,
+  Prisma,
+} from "@prisma/client";
 import { prisma } from "~/db.server";
 
 export type { Card, Attack } from "@prisma/client";
 export { Rarity, PokemonType, PokemonTGGEpxansions } from "@prisma/client";
 
-export type CreateCardArgs = Pick<Card, "title" | "hp" | "weakness" | "resistance" | "rarity" | "type" | "expansion"> & {
+export type CreateCardArgs = Pick<
+  Card,
+  "title" | "hp" | "weakness" | "resistance" | "rarity" | "type" | "expansion"
+> & {
   userId: User["id"];
-  attacks: Array<Pick<Attack, "name" | "body" | "damage">>
-}
+  attacks: Array<Pick<Attack, "name" | "body" | "damage">>;
+};
 
 /**
  * Creates a new card.
@@ -46,7 +56,7 @@ export function createCard({
       type,
       expansion,
       attacks: {
-        create: [...attacks]
+        create: [...attacks],
       },
       user: {
         connect: {
@@ -57,11 +67,11 @@ export function createCard({
   });
 }
 
-type CardId = Pick<Card, "id">
+type CardId = Pick<Card, "id">;
 /**
  * Updates an existing card
  *
- * @param {CreateCardArgs & CardId & { userId: User["id"] }} param 
+ * @param {CreateCardArgs & CardId & { userId: User["id"] }} param
  * @param {string} param.title - The title of the card.
  * @param {number} param.hp - The hit points of the card.
  * @param {string} param.weakness - The weakness of the card.
@@ -100,14 +110,12 @@ export function updateCardById({
 
 /**
  * Get a specific card by its id
- * 
+ *
  * @param {Object} param - The parameter object
  * @param {string} param.id - The id of the card to retrieve
  * @returns {Promise<Card>} A promise that resolves to the card object
  */
-export function getCardById({
-  id,
-}: CardId) {
+export function getCardById({ id }: CardId) {
   return prisma.card.findFirst({
     select: {
       id: true,
@@ -126,29 +134,27 @@ export function getCardById({
 
 /**
  * Get all cards
- * 
+ *
  * @returns {Promise<Array<Card>>} An array of cards sorted by updatedAt in descending order
  */
 export function getAllCards() {
-  return prisma.card.findMany(
-    {
-      select: {
-        id: true,
-        title: true,
-        hp: true,
-        rarity: true,
-        type: true,
-        expansion: true,
-        updatedAt: true
-      },
-      orderBy: { updatedAt: "desc" },
-    }
-  );
+  return prisma.card.findMany({
+    select: {
+      id: true,
+      title: true,
+      hp: true,
+      rarity: true,
+      type: true,
+      expansion: true,
+      updatedAt: true,
+    },
+    orderBy: { updatedAt: "desc" },
+  });
 }
 
 /**
  * Get all cards filtered by query, expansion and type
- * 
+ *
  * @param {{ q?: string; expansion?: PokemonTGGEpxansions; type?: PokemonType }} param
  * @param {string} [param.q] - The query to filter cards by title
  * @param {PokemonTGGEpxansions} [param.expansion] - The expansion to filter cards by
@@ -158,16 +164,16 @@ export function getAllCards() {
 export function getAllCardsWithFilters({
   q,
   expansion,
-  type
+  type,
 }: {
   q?: string;
-  expansion?: PokemonTGGEpxansions
-  type?: PokemonType
+  expansion?: PokemonTGGEpxansions;
+  type?: PokemonType;
 }) {
   // Building the filter
   const where: Prisma.CardWhereInput = {};
   if (q) {
-    where.title = { contains: q, mode: 'insensitive', };
+    where.title = { contains: q, mode: "insensitive" };
   }
   if (expansion) {
     where.expansion = expansion;
@@ -184,7 +190,7 @@ export function getAllCardsWithFilters({
       rarity: true,
       type: true,
       expansion: true,
-      updatedAt: true
+      updatedAt: true,
     },
     orderBy: { updatedAt: "desc" },
   });
@@ -200,7 +206,7 @@ export function getAllCardsWithFilters({
  */
 export function deleteCardById({
   id,
-  userId
+  userId,
 }: CardId & { userId: User["id"] }) {
   return prisma.card.delete({
     where: { id },
@@ -209,16 +215,15 @@ export function deleteCardById({
 
 /**
  * Simulates a battle between an attacker and a defender.
- * 
+ *
  * @param {Pick<Card, "id" | "type">} attacker - The attacker card.
  * @param {Pick<Card, "hp" | "weakness" | "resistance">} defender - The defender card.
  * @returns {Promise<boolean>} - A promise that resolves to a boolean indicating whether the attacker wins the battle.
  */
 export async function simulateBattle(
   attacker: Pick<Card, "id" | "type">,
-  defender: Pick<Card, "hp" | "weakness" | "resistance">
+  defender: Pick<Card, "hp" | "weakness" | "resistance">,
 ): Promise<boolean> {
-
   const availableAttacks = await prisma.card.findFirst({
     select: {
       attacks: true,
@@ -242,7 +247,8 @@ export async function simulateBattle(
     const isResistant = defender.resistance?.includes(attacker.type);
 
     // ASSUMPTION: resistance is always "-20" and weakness is always "x2"
-    const oneHitResult = defender.hp - (baseDamage * (isWeak ? 2 : 1) - (isResistant ? 20 : 0));
+    const oneHitResult =
+      defender.hp - (baseDamage * (isWeak ? 2 : 1) - (isResistant ? 20 : 0));
 
     return oneHitResult <= 0;
   });
@@ -250,20 +256,16 @@ export async function simulateBattle(
   return result;
 }
 
-
 /**
  * Analyzes the card type and returns the cards that are weak against it and strong against it.
  *
  * @param {PokemonType} cardType - The type of the card to analyze.
  * @returns {Promise<{ weakAgainst: Array<Pick<Card, "id" | "title">>, strongAgainst: Array<Pick<Card, "id" | "title">> }>} - A promise that resolves to an object containing the cards that are weak against the card type and strong against it.
  */
-export async function analyzeCardType(
-  cardType: PokemonType,
-): Promise<{
+export async function analyzeCardType(cardType: PokemonType): Promise<{
   weakAgainst: Array<Pick<Card, "id" | "title">>;
   strongAgainst: Array<Pick<Card, "id" | "title">>;
 }> {
-
   // Finds cards with resistance to the card type.
   const weakAgainst = await prisma.card.findMany({
     where: { resistance: cardType },

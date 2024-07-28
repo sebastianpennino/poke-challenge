@@ -3,7 +3,6 @@ import { json, useLoaderData } from "@remix-run/react";
 import invariant from "tiny-invariant";
 import { getCardById } from "~/models/card.server";
 
-
 export const loader = async ({ params }: LoaderFunctionArgs) => {
   invariant(params.cardId, "cardId not found");
   const card = await getCardById({ id: params.cardId });
@@ -20,7 +19,9 @@ export default function CardEdition() {
 
   return (
     <div className="flex flex-col h-full items-center justify-center">
-      <h1 className="text-3xl font-bold text-center p-8 text-red-500">Card Edition - Not implemented yet</h1>
+      <h1 className="text-3xl font-bold text-center p-8 text-red-500">
+        Card Edition - Not implemented yet
+      </h1>
       <p>Name: {card.title}</p>
       <p>ID: {card.id}</p>
       <p>Type: {card.type}</p>

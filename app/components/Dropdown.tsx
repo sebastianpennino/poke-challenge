@@ -20,16 +20,16 @@ const Dropdown = ({ label, options, selected, onSelect }: DropdownProps) => {
       </button>
       {isOpen && (
         <div className="absolute top-12 left-0 w-full sm:w-auto bg-white border rounded-lg shadow-lg min-w-[100px]">
-            <div
-              key="default"
-              onClick={() => {
-                onSelect("");
-                setIsOpen(false);
-              }}
-              className="p-2 hover:bg-gray-200 cursor-pointer"
-            >
-              {label}
-            </div>
+          <div
+            key="default"
+            onClick={() => {
+              onSelect("");
+              setIsOpen(false);
+            }}
+            className="p-2 hover:bg-gray-200 cursor-pointer"
+          >
+            {label}
+          </div>
           {options.map((option) => (
             <div
               key={option}

@@ -1,13 +1,18 @@
-import cx from 'classnames';
+import cx from "classnames";
 
 type ModalProps = {
-  mode: "success" | "error",
-  isOpen: boolean,
-  onClose: () => void,
-  children: React.ReactNode
-}
+  mode: "success" | "error";
+  isOpen: boolean;
+  onClose: () => void;
+  children: React.ReactNode;
+};
 
-const Modal = ({ isOpen, onClose, children, mode }: ModalProps): JSX.Element | null => {
+const Modal = ({
+  isOpen,
+  onClose,
+  children,
+  mode,
+}: ModalProps): JSX.Element | null => {
   if (!isOpen) return null;
 
   return (
@@ -28,6 +33,6 @@ const Modal = ({ isOpen, onClose, children, mode }: ModalProps): JSX.Element | n
       </div>
     </div>
   );
-}
+};
 
 export default Modal;

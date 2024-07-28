@@ -9,26 +9,28 @@ Note: You can find the project repo at https://github.com/sebastianpennino/poke-
 - [React 18.3.1](https://react.dev/) with [TypeScript](https://typescriptlang.org)
 - Email/Password Authentication with [cookie-based sessions](https://remix.run/utils/sessions#creatememorysessionstorage)
 - Database ORM with [Prisma](https://prisma.io) (brief explanation of [Prisma concepts](docs/prisma.md) in case you need them)
+- To upload and cache pokemon images I'm using [Redis](https://redis.io/)
 - Styling with [Tailwind](https://tailwindcss.com/)
 - Code formatting with [Prettier](https://prettier.io)
 - Linting with [ESLint](https://eslint.org) (configured in `.eslintrc.js`).
 
-- [Redis](https://redis.io/) - We are using it to cache pokemon images
+🔴 **TODO / PENDING** 🔴
 
-🔴 **TODO / PENDING** 🔴 
 - End-to-end testing with [Cypress](https://cypress.io)
 - Local third party request mocking with [MSW](https://mswjs.io)
 - Unit testing with [Vitest](https://vitest.dev) and [Testing Library](https://testing-library.com)
 
 ## Running the project locally
 
-### Prerequisites 
+### Prerequisites
 
 You should have installed on your machine:
-- [Docker](https://www.docker.com/get-started) 
+
+- [Docker](https://www.docker.com/get-started)
 - [NodeJS](https://nodejs.org/en) (version 18+)
 
 Also you will need a local `.env` file
+
 - create a .env file on the root of the project (copying `.env.sample`)
 
 ### Instructions
@@ -98,7 +100,6 @@ To run these tests in development, run `npm run test:e2e:dev` which will start t
 🔴 TODO: PENDING 🔴
 
 Using `vitest` for lower level tests of utilities and individual components. Using DOM-specific assertion helpers via [`@testing-library/jest-dom`](https://testing-library.com/jest-dom).
-
 
 ## Other stuff
 

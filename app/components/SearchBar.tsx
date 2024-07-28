@@ -7,40 +7,40 @@ export function SearchBar() {
   const [searchParams, setSearchParams] = useSearchParams();
 
   const [query, setQuery] = useState(() => {
-    return searchParams.get("q") ?? ""
+    return searchParams.get("q") ?? "";
+  });
+  const [expansion, setExpansion] = useState(() => {
+    return searchParams.get("expansion") ?? "";
+  });
+  const [cardType, setCardType] = useState(() => {
+    return searchParams.get("type") ?? "";
   });
 
   const deferredQuery = useDeferredValue(query);
-
-  const [expansion, setExpansion] = useState(() => {
-    return searchParams.get("expansion") ?? ""
-  });
-
   const deferredExpa = useDeferredValue(expansion);
-
-  const [cardType, setCardType] = useState(() => {
-    return searchParams.get("type") ?? ""
-  });
-
   const deferredType = useDeferredValue(cardType);
-
-  useEffect(() => {
-    const updatedParams = {
-      q: deferredQuery,
-      ...(deferredExpa ? { expansion: deferredExpa } : {}),
-      ...(deferredType ? { type: deferredType } : {})
-    }
-    setSearchParams(updatedParams);
-  }, [deferredQuery, deferredExpa, deferredType, setSearchParams]);
 
   const updateParams = () => {
     const updatedParams = {
       q: deferredQuery,
       ...(deferredExpa ? { expansion: deferredExpa } : {}),
-      ...(deferredType ? { type: deferredType } : {})
-    }
+      ...(deferredType ? { type: deferredType } : {}),
+    };
     setSearchParams(updatedParams);
   };
+
+  const resetParams = () => {
+    setQuery("");
+    setExpansion("");
+    setCardType("");
+    setSearchParams({
+      q: "",
+    });
+  };
+
+  useEffect(() => {
+    updateParams();
+  }, [deferredQuery, deferredExpa, deferredType, setSearchParams]);
 
   return (
     <div className="flex flex-col sm:flex-row items-center justify-center space-y-4 sm:space-y-0 sm:space-x-4 p-2 bg-cyan-600">
@@ -50,7 +50,7 @@ export function SearchBar() {
         placeholder="Search cards..."
         className="border rounded-lg p-2 w-full sm:w-auto"
         onKeyDown={(event) => {
-          if (event.key === 'Enter') {
+          if (event.key === "Enter") {
             updateParams();
           }
         }}
@@ -78,14 +78,7 @@ export function SearchBar() {
       </button>
       */}
       <button
-        onClick={() => {
-          setQuery("");
-          setExpansion("");
-          setCardType("");
-          setSearchParams({
-            q: ""
-          });
-        }}
+        onClick={resetParams}
         className="bg-gray-500 text-white p-2 px-4 rounded-lg"
       >
         Reset Filters

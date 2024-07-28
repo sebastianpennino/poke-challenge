@@ -10,7 +10,7 @@ export const loader = async ({ request }: LoaderFunctionArgs) => {
   const userId = await requireUserId(request);
   invariant(userId, "userId not found");
 
-  return null
+  return null;
 };
 
 export default function CardsPage() {
@@ -22,7 +22,12 @@ export default function CardsPage() {
       <header className="bg-slate-800 p-2 text-white h-16">
         <div className="flex items-center justify-between">
           <Link to="/cards">
-            <img src="/assets/images/logo192.png" width="32" height="32" alt="Home" />
+            <img
+              src="/assets/images/logo192.png"
+              width="32"
+              height="32"
+              alt="Home"
+            />
           </Link>
           <div className="text-center">
             <h1 className="poke-title text-xl md:text-3xl font-bold">
@@ -39,7 +44,6 @@ export default function CardsPage() {
             </button>
           </Form>
         </div>
-
       </header>
 
       {/* Main Content */}

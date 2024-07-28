@@ -1,4 +1,9 @@
-import { PrismaClient, Rarity, PokemonType, PokemonTGGEpxansions } from "@prisma/client";
+import {
+  PrismaClient,
+  Rarity,
+  PokemonType,
+  PokemonTGGEpxansions,
+} from "@prisma/client";
 import bcrypt from "bcryptjs";
 
 const prisma = new PrismaClient();
@@ -28,13 +33,13 @@ async function seed() {
 
   const attackData = {
     gnaw: {
-      name: 'Gnaw',
-      body: 'Some description for gnaw.',
+      name: "Gnaw",
+      body: "Some description for gnaw.",
       damage: 20,
     },
     fireBlast: {
-      name: 'Fire Blast',
-      body: 'Some description for fire blast.',
+      name: "Fire Blast",
+      body: "Some description for fire blast.",
       damage: 120,
     },
     slam: {
@@ -76,63 +81,63 @@ async function seed() {
       damage: 200,
     },
     transform: {
-      name: 'Transform',
+      name: "Transform",
       body: "it doesnt causes damage",
       damage: 0,
     },
     flamethrower: {
-      name: 'Flamethrower',
+      name: "Flamethrower",
       damage: 70,
     },
     waterGun: {
-      name: 'Water Gun',
+      name: "Water Gun",
       damage: 30,
     },
     vineWhip: {
-      name: 'Vine Whip',
+      name: "Vine Whip",
       damage: 40,
     },
     iceBeam: {
-      name: 'Ice Beam',
+      name: "Ice Beam",
       damage: 90,
     },
     dynamicPunch: {
-      name: 'Dynamic Punch',
+      name: "Dynamic Punch",
       damage: 80,
     },
     shadowBall: {
-      name: 'Shadow Ball',
+      name: "Shadow Ball",
       damage: 80,
     },
     earthquake: {
-      name: 'Earthquake',
+      name: "Earthquake",
       damage: 40,
     },
     hurricane: {
-      name: 'Hurricane',
+      name: "Hurricane",
       damage: 60,
     },
     xScissor: {
-      name: 'X-Scissor',
+      name: "X-Scissor",
       damage: 50,
     },
     stoneEdge: {
-      name: 'Stone Edge',
+      name: "Stone Edge",
       damage: 100,
     },
     dragonClaw: {
-      name: 'Dragon Claw',
+      name: "Dragon Claw",
       damage: 80,
     },
     ironTail: {
-      name: 'Iron Tail',
+      name: "Iron Tail",
       damage: 100,
     },
     moonblast: {
-      name: 'Moonblast',
+      name: "Moonblast",
       damage: 90,
     },
-  }
+  };
 
   const cardData = [
     {
@@ -142,9 +147,7 @@ async function seed() {
       resistance: PokemonType.STEEL,
       rarity: Rarity.COMMON,
       type: PokemonType.ELECTRIC,
-      attacks: [
-        { ...attackData.gnaw },
-      ],
+      attacks: [{ ...attackData.gnaw }],
     },
     {
       title: "Charizard",
@@ -152,9 +155,7 @@ async function seed() {
       weakness: PokemonType.WATER,
       rarity: Rarity.RARE,
       type: PokemonType.FIRE,
-      attacks: [
-        { ...attackData.fireBlast },
-      ],
+      attacks: [{ ...attackData.fireBlast }],
     },
     {
       title: "Onix",
@@ -162,11 +163,7 @@ async function seed() {
       weakness: PokemonType.ROCK,
       rarity: Rarity.UNCOMMON,
       type: PokemonType.FIGHTING,
-      attacks: [
-        { ...attackData.slam },
-        { ...attackData.bodySlam },
-      ],
-
+      attacks: [{ ...attackData.slam }, { ...attackData.bodySlam }],
     },
     {
       title: "Feraligatr",
@@ -174,10 +171,8 @@ async function seed() {
       weakness: PokemonType.ELECTRIC,
       rarity: Rarity.RARE,
       type: PokemonType.WATER,
-      attacks: [
-        { ...attackData.giantWave },
-      ],
-      expansion: PokemonTGGEpxansions.B2
+      attacks: [{ ...attackData.giantWave }],
+      expansion: PokemonTGGEpxansions.B2,
     },
     {
       title: "Sneasel",
@@ -185,9 +180,7 @@ async function seed() {
       weakness: PokemonType.GRASS,
       rarity: Rarity.UNCOMMON,
       type: PokemonType.DARK,
-      attacks: [
-        { ...attackData.digClaws },
-      ],
+      attacks: [{ ...attackData.digClaws }],
     },
     {
       title: "Scizor",
@@ -196,10 +189,8 @@ async function seed() {
       resistance: PokemonType.PSYCHIC,
       rarity: Rarity.RARE,
       type: PokemonType.STEEL,
-      attacks: [
-        { ...attackData.specialBlow },
-      ],
-      expansion: PokemonTGGEpxansions.FO
+      attacks: [{ ...attackData.specialBlow }],
+      expansion: PokemonTGGEpxansions.FO,
     },
     {
       title: "Treecko",
@@ -208,10 +199,7 @@ async function seed() {
       resistance: PokemonType.WATER,
       rarity: Rarity.COMMON,
       type: PokemonType.DARK,
-      attacks: [
-        { ...attackData.pound },
-        { ...attackData.shinningClaws },
-      ],
+      attacks: [{ ...attackData.pound }, { ...attackData.shinningClaws }],
     },
     {
       title: "Ditto",
@@ -220,10 +208,8 @@ async function seed() {
       resistance: PokemonType.GHOST,
       rarity: Rarity.COMMON,
       type: PokemonType.NORMAL,
-      attacks: [
-        { ...attackData.transform },
-      ],
-      expansion: PokemonTGGEpxansions.FO
+      attacks: [{ ...attackData.transform }],
+      expansion: PokemonTGGEpxansions.FO,
     },
 
     {
@@ -233,9 +219,7 @@ async function seed() {
       resistance: PokemonType.GRASS,
       rarity: Rarity.COMMON,
       type: PokemonType.FIRE,
-      attacks: [
-        { ...attackData.flamethrower },
-      ],
+      attacks: [{ ...attackData.flamethrower }],
     },
     {
       title: "Squirtle",
@@ -243,9 +227,7 @@ async function seed() {
       weakness: PokemonType.ELECTRIC,
       rarity: Rarity.COMMON,
       type: PokemonType.WATER,
-      attacks: [
-        { ...attackData.waterGun },
-      ],
+      attacks: [{ ...attackData.waterGun }],
     },
     {
       title: "Bulbasaur",
@@ -253,10 +235,8 @@ async function seed() {
       resistance: PokemonType.WATER,
       rarity: Rarity.COMMON,
       type: PokemonType.GRASS,
-      attacks: [
-        { ...attackData.vineWhip },
-      ],
-      expansion: PokemonTGGEpxansions.G2
+      attacks: [{ ...attackData.vineWhip }],
+      expansion: PokemonTGGEpxansions.G2,
     },
     {
       title: "Articuno",
@@ -264,10 +244,8 @@ async function seed() {
       resistance: PokemonType.WATER,
       rarity: Rarity.RARE,
       type: PokemonType.ICE,
-      attacks: [
-        { ...attackData.iceBeam },
-      ],
-      expansion: PokemonTGGEpxansions.G2
+      attacks: [{ ...attackData.iceBeam }],
+      expansion: PokemonTGGEpxansions.G2,
     },
     {
       title: "Machamp",
@@ -276,10 +254,8 @@ async function seed() {
       resistance: PokemonType.ROCK,
       rarity: Rarity.UNCOMMON,
       type: PokemonType.FIGHTING,
-      attacks: [
-        { ...attackData.dynamicPunch },
-      ],
-      expansion: PokemonTGGEpxansions.B2
+      attacks: [{ ...attackData.dynamicPunch }],
+      expansion: PokemonTGGEpxansions.B2,
     },
     {
       title: "Gengar",
@@ -288,10 +264,8 @@ async function seed() {
       resistance: PokemonType.DARK,
       rarity: Rarity.RARE,
       type: PokemonType.POISON,
-      attacks: [
-        { ...attackData.shadowBall },
-      ],
-      expansion: PokemonTGGEpxansions.B2
+      attacks: [{ ...attackData.shadowBall }],
+      expansion: PokemonTGGEpxansions.B2,
     },
     {
       title: "Groudon",
@@ -300,9 +274,7 @@ async function seed() {
       resistance: PokemonType.ELECTRIC,
       rarity: Rarity.COMMON,
       type: PokemonType.GROUND,
-      attacks: [
-        { ...attackData.earthquake },
-      ],
+      attacks: [{ ...attackData.earthquake }],
     },
     {
       title: "Pidgeot",
@@ -311,10 +283,8 @@ async function seed() {
       resistance: PokemonType.NORMAL,
       rarity: Rarity.COMMON,
       type: PokemonType.FLYING,
-      attacks: [
-        { ...attackData.hurricane },
-      ],
-      expansion: PokemonTGGEpxansions.B2
+      attacks: [{ ...attackData.hurricane }],
+      expansion: PokemonTGGEpxansions.B2,
     },
     {
       title: "Scyther",
@@ -323,10 +293,8 @@ async function seed() {
       resistance: PokemonType.FIGHTING,
       rarity: Rarity.COMMON,
       type: PokemonType.BUG,
-      attacks: [
-        { ...attackData.xScissor },
-      ],
-      expansion: PokemonTGGEpxansions.TR
+      attacks: [{ ...attackData.xScissor }],
+      expansion: PokemonTGGEpxansions.TR,
     },
     {
       title: "Tyranitar",
@@ -335,9 +303,7 @@ async function seed() {
       resistance: PokemonType.GROUND,
       rarity: Rarity.COMMON,
       type: PokemonType.ROCK,
-      attacks: [
-        { ...attackData.stoneEdge },
-      ],
+      attacks: [{ ...attackData.stoneEdge }],
     },
     {
       title: "Mismagius",
@@ -346,10 +312,8 @@ async function seed() {
       resistance: PokemonType.GRASS,
       rarity: Rarity.COMMON,
       type: PokemonType.GHOST,
-      attacks: [
-        { ...attackData.shadowBall },
-      ],
-      expansion: PokemonTGGEpxansions.JU
+      attacks: [{ ...attackData.shadowBall }],
+      expansion: PokemonTGGEpxansions.JU,
     },
     {
       title: "Dragonite",
@@ -358,9 +322,7 @@ async function seed() {
       resistance: PokemonType.POISON,
       rarity: Rarity.COMMON,
       type: PokemonType.DRAGON,
-      attacks: [
-        { ...attackData.dragonClaw },
-      ],
+      attacks: [{ ...attackData.dragonClaw }],
     },
     {
       title: "Steelix",
@@ -369,10 +331,8 @@ async function seed() {
       resistance: PokemonType.POISON,
       rarity: Rarity.UNCOMMON,
       type: PokemonType.STEEL,
-      attacks: [
-        { ...attackData.ironTail },
-      ],
-      expansion: PokemonTGGEpxansions.G2
+      attacks: [{ ...attackData.ironTail }],
+      expansion: PokemonTGGEpxansions.G2,
     },
     {
       title: "Sylveon",
@@ -381,9 +341,7 @@ async function seed() {
       resistance: PokemonType.WATER,
       rarity: Rarity.COMMON,
       type: PokemonType.FAIRY,
-      attacks: [
-        { ...attackData.moonblast },
-      ],
+      attacks: [{ ...attackData.moonblast }],
     },
   ];
 
@@ -393,7 +351,7 @@ async function seed() {
         data: {
           ...card,
           attacks: {
-            create: [...card.attacks]
+            create: [...card.attacks],
           },
           // Mark all cards as created by the default user
           user: {
@@ -401,12 +359,12 @@ async function seed() {
               id: user.id,
             },
           },
-        }
+        },
       });
-      console.log('Card created:', newCard.title);
+      console.log("Card created:", newCard.title);
     }
   } catch (error) {
-    console.error('Error creating starting cards:', error);
+    console.error("Error creating starting cards:", error);
   }
 
   console.log(`Database has been seeded. 🌱`);
