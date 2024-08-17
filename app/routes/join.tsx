@@ -12,9 +12,14 @@ import { createUserSession, getUserId } from "~/session.server";
 import { safeRedirect, validateEmail } from "~/utils";
 
 export const loader = async ({ request }: LoaderFunctionArgs) => {
-  const userId = await getUserId(request);
-  if (userId) return redirect("/");
-  return json({});
+  try {
+    const userId = await getUserId(request);
+    if (userId) return redirect("/");
+    return json({});
+  } catch (error) {
+    console.error(error);
+    return json({ error: "An unexpected error occurred" }, { status: 500 });
+  }
 };
 
 export const action = async ({ request }: ActionFunctionArgs) => {

@@ -12,9 +12,17 @@ import { createUserSession, getUserId } from "~/session.server";
 import { safeRedirect, validateEmail } from "~/utils";
 
 export const loader = async ({ request }: LoaderFunctionArgs) => {
-  const userId = await getUserId(request);
-  if (userId) return redirect("/");
-  return json({});
+  try {
+    const userId = await getUserId(request);
+    if (userId) return redirect("/");
+    return json({});
+  } catch (error) {
+    console.error(`Error loading login page: ${error}`);
+    throw json(
+      { error: "Internal server error" },
+      { status: 500 },
+    );
+  }
 };
 
 export const action = async ({ request }: ActionFunctionArgs) => {

@@ -66,7 +66,9 @@ export default function CardList() {
                 {cardItems.map((card, idx) => {
                   if (!card) return null;
                   return (
-                    <Link to={`/cards/${card.id}`} key={card.id}>
+                    <Link to={`/cards/${card.id}`} key={card.id}
+                      className="animate-in fade-in zoom-in"
+                    >
                       <PokemonCard
                         expansion={card.expansion}
                         hp={card.hp}

@@ -168,7 +168,7 @@ export default function CardDetailPage() {
   return (
     <div className="flex flex-col md:flex-row items-center justify-center min-h-screen battle-page-bg sm:my-12 md:my-0">
       <div className="md:flex-1 flex flex-col items-center justify-center md:scale-125">
-        <div className="flex flex-col items-center justify-center">
+        <div className="flex flex-col items-center justify-center animate-in fade-in zoom-in">
           {/* Pokemon card */}
           <PokemonCard
             expansion={card.expansion}

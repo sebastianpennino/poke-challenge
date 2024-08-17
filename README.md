@@ -1,6 +1,8 @@
 # Poke Card Creator
 
-A code challenge involving pokemon cards
+A code challenge involving pokemon cards.
+
+
 Note: You can find the project repo at https://github.com/sebastianpennino/poke-challenge
 
 ## Tech Stack

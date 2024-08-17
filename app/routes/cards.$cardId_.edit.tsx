@@ -5,11 +5,18 @@ import { getCardById } from "~/models/card.server";
 
 export const loader = async ({ params }: LoaderFunctionArgs) => {
   invariant(params.cardId, "cardId not found");
-  const card = await getCardById({ id: params.cardId });
-  if (!card) {
-    throw new Response("Not Found", { status: 404 });
+  try {
+    const card = await getCardById({ id: params.cardId });
+    if (!card) {
+      throw new Response("Not Found", { status: 404 });
+    }
+    return json({ card });
+  } catch (error) {
+    if (error instanceof Error) {
+      throw new Response(error.message, { status: 500 });
+    }
+    throw error;
   }
-  return json({ card });
 };
 
 // NOT IMPLEMENTED YET
